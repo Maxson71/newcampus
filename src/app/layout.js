@@ -1,14 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import {Roboto} from "next/font/google";
 import "./globals.css";
+import SideBar from "@/components/SideBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const roboto = Roboto({
+    variable: "--font-roboto",
+    subsets: ["latin", "cyrillic"],
+    weight: "400",
 });
 
 export const metadata = {
@@ -18,12 +15,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+      <html lang="uk">
+          <body className={`${roboto.variable} antialiased`}>
+              <div className="flex h-full w-full row">
+                  <SideBar/>
+                  <div className="flex-1 page p-2">
+                      {children}
+                  </div>
+              </div>
+          </body>
+      </html>
   );
 }
