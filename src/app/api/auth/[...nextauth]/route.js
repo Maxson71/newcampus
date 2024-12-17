@@ -8,6 +8,7 @@ export const authHandler = NextAuth({
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
 });
 
 export {authHandler as GET, authHandler as POST};

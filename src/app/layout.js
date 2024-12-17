@@ -1,7 +1,6 @@
 import {Roboto} from "next/font/google";
 import "./globals.css";
 import SideBar from "@/components/SideBar";
-import {SessionProvider, useSession} from "next-auth/react";
 import AppProvider from "@/app/AppProvider";
 
 const roboto = Roboto({
