@@ -1,6 +1,8 @@
 import {Roboto} from "next/font/google";
 import "./globals.css";
 import SideBar from "@/components/SideBar";
+import {SessionProvider, useSession} from "next-auth/react";
+import AppProvider from "@/app/AppProvider";
 
 const roboto = Roboto({
     variable: "--font-roboto",
@@ -14,15 +16,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
       <html lang="uk">
           <body className={`${roboto.variable} antialiased`}>
-              <div className="flex h-full w-full row">
-                  <SideBar/>
-                  <div className="flex-1 page p-2">
-                      {children}
+              <AppProvider>
+                  <div className="flex h-full w-full row">
+                      <SideBar/>
+                      <div className="flex-1 page p-2">
+                          {children}
+                      </div>
                   </div>
-              </div>
+              </AppProvider>
           </body>
       </html>
   );

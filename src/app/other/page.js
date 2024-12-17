@@ -1,9 +1,20 @@
-import Image from "next/image";
+"use client";
+
+import {useSession} from "next-auth/react";
+import LoginAlerts from "@/components/LoginAlerts";
 
 export default function Home() {
-  return (
-    <div className="">
-        В розробці
-    </div>
-  );
+    const { data: session } = useSession();
+
+    if (!session) {
+        return (
+            <LoginAlerts/>
+        );
+    }
+
+    return (
+      <div className="">
+          В розробці
+      </div>
+    );
 }

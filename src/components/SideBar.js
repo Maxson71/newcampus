@@ -1,12 +1,16 @@
-"use client"; // Клієнтський компонент
+"use client";
 
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiCheckCircle, FiCalendar, FiAward, FiFileText, FiLayers } from "react-icons/fi";
-import {IoSettingsOutline} from "react-icons/io5";
+import {FiCheckCircle, FiCalendar, FiAward, FiFileText, FiLayers, FiLogOut} from "react-icons/fi";
+import SignInButton from "@/components/SignInButton";
+import {signOut, useSession} from "next-auth/react";
 
 export default function SideBar() {
+
+    const { data: session } = useSession();
+
     const pathname = usePathname();
 
     const menuItems = [
@@ -16,7 +20,6 @@ export default function SideBar() {
         { name: "Методички", path: "/methodics", icon: FiFileText },
         { name: "Інше", path: "/other", icon: FiLayers },
     ];
-
     return (
         <div className="w-64 h-screen bg-white shadow-lg flex flex-col justify-between">
             <div className="px-5">
@@ -61,20 +64,31 @@ export default function SideBar() {
             </div>
 
             {/* Профіль */}
-            <div className="p-5">
-                <div className="bg-gray-50 p-1.5 flex items-center rounded-lg border">
-                    <div className="w-10 h-10 bg-gray-300 rounded-lg mr-3"></div>
-                    <div>
-                        <p className="text-gray-600 font-semibold text-sm">Muhammed Ali</p>
-                        <p className="text-gray-500 text-xs">Студент</p>
-                    </div>
-                    <div className="ml-auto p-2 text-gray-500">
-                        <span className="cursor-pointer">
-                            <IoSettingsOutline size="22"/>
-                        </span>
+            {session?
+                <div className="p-5">
+                    <div className="bg-gray-50 p-1.5 flex items-center rounded-lg border">
+                        {session.user?.image?
+                            <img src={session.user?.image} alt={session.user?.name} className="w-10 h-10 rounded-lg mr-3"/>
+                            :
+                            <div className="w-10 h-10 bg-gray-300 rounded-lg mr-3"></div>
+                        }
+                        <div>
+                            <p className="text-gray-600 font-semibold text-sm">{session.user?.name}</p>
+                            <p className="text-gray-500 text-xs">Студент</p>
+                        </div>
+                        <button className="ml-auto p-2 items-center justify-center text-gray-500 cursor-pointer"
+                                onClick={() => signOut()}>
+                                <FiLogOut size="24"/>
+                        </button>
                     </div>
                 </div>
-            </div>
+                :
+                <div className="p-5">
+                    <div className="bg-gray-50 p-1.5 flex items-center rounded-lg border">
+                        <SignInButton/>
+                    </div>
+                </div>
+            }
         </div>
     );
 }
