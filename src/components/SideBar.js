@@ -74,7 +74,7 @@ export default function SideBar() {
                         }
                         <div>
                             <p className="text-gray-600 font-semibold text-sm">{session.user?.name}</p>
-                            <p className="text-gray-500 text-xs">Студент</p>
+                            <p className="text-gray-500 text-xs">Студент ІО-22</p>
                         </div>
                         <button className="ml-auto p-2 items-center justify-center text-gray-500 cursor-pointer"
                                 onClick={() => signOut()}>
