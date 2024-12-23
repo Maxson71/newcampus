@@ -5,30 +5,7 @@
         "semester": "1 семестр",
         "name": "Правознавство",
         "teacher": "Muhammed Ali",
-        "speaker": "КАМГЗ3 ФЛ",
-        "group": [
-            {
-                "id": 1,
-                "name": "ІО-22",
-                "students": [
-                    {
-                        "id": 1,
-                        "name": "Іванов Іван Іванович",
-                        "attendance": 5
-                    },
-                    {
-                        "id": 2,
-                        "name": "Петров Петро Петрович",
-                        "attendance": 4
-                    },
-                    {
-                        "id": 3,
-                        "name": "Сидоров Сидр Сидорович",
-                        "attendance": 5
-                    }
-                ]
-            }
-        ]
+        "speaker": "КАМГЗ3 ФЛ"
     },
     {
         "id": 2,

@@ -1,4 +1,9 @@
+"use client";
+
+import { useRouter } from 'next/navigation';
+
 export default function ControlTable({ selectedYear, selectedSemester, selectedModule }) {
+    const router = useRouter();
     const tableData = require('../data.json');
     // Фільтрація даних
    const filteredData = tableData.filter(row => {
@@ -11,6 +16,11 @@ export default function ControlTable({ selectedYear, selectedSemester, selectedM
            row.name === selectedModule;
         return yearMatch && semesterMatch && moduleMatch;
    });
+
+    const handleRowClick = (moduleId) => {
+        router.push(`/current-control/${moduleId}`);
+    };
+
     return (
        <div className="mt-6">
            <table className="min-w-full divide-y divide-gray-200">
@@ -35,7 +45,11 @@ export default function ControlTable({ selectedYear, selectedSemester, selectedM
                </thead>
                <tbody className="bg-white divide-y divide-gray-200">
                    {filteredData.map((row, index) => (
-                       <tr key={index} className="hover:bg-gray-50">                  
+                        <tr 
+                            key={index} 
+                            className="hover:bg-gray-50 cursor-pointer"
+                            onClick={() => handleRowClick(row.id)}
+                        >                
                             <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
                                 {row.year}
                             </td>
